@@ -1,95 +1,179 @@
 # FlowForge Frontend
 
-Frontend application for FlowForge — an AI workflow pipeline builder built with React and React Flow.
-
-## Features
-
-- Drag-and-drop pipeline builder
-- Reusable node abstraction system
-- Dynamic TextNode variable parsing
-- Automatic handle generation
-- DAG analysis integration
-- Custom modal-based pipeline insights
-- Node deletion and pipeline reset
-- Responsive dark-themed UI
-
-## Tech Stack
-
-- React
-- React Flow
-- Zustand
-- JavaScript
-- CSS
-
-## Core Functionality
-
-### Node Abstraction
-
-All nodes are built using a reusable `BaseNode` component that centralizes:
-
-- Layout
-- Styling
-- Handle rendering
-- Shared functionality
-
-This allows new nodes to be created quickly with minimal repeated code.
+`FlowForge` is an interactive AI workflow pipeline builder built using React, React Flow, Zustand, and integrated with a FastAPI backend. The application allows users to visually create and manage pipelines using drag-and-drop nodes connected through dynamic edges.
 
 ---
 
-### Dynamic TextNode
+# Project Overview
 
-The TextNode supports:
+The application provides a node-based visual workflow editor where users can:
 
-- Auto-resizing text areas
-- Variable parsing using double curly braces
+* Drag and drop nodes onto a canvas
+* Connect nodes using handles
+* Dynamically create workflows
+* Define variables inside text nodes
+* Analyze pipelines using backend graph processing
+* Validate whether a workflow forms a Directed Acyclic Graph (DAG)
+
+The frontend communicates with a FastAPI backend which processes the graph structure and returns:
+
+* Total number of nodes
+* Total number of edges
+* DAG validation result
+
+---
+
+# Key Features
+
+## Reusable Node Abstraction
+
+A reusable `BaseNode` component was created to eliminate duplicated logic between nodes.
+
+The abstraction centralizes:
+
+* Shared layout
+* Styling
+* Handle rendering
+* Dynamic input/output configuration
+* Node structure management
+
+This allows new nodes to be created efficiently with minimal repeated code.
+
+---
+
+## Dynamic TextNode Logic
+
+The TextNode includes:
+
+* Auto-resizing text area
+* Dynamic variable parsing
+* Automatic input handle generation
+
+Variables wrapped inside double curly braces are detected dynamically.
 
 Example:
 
-```text id="jlmwg1"
+```text id="2twm4m"
 {{input}}
 {{username}}
 ```
 
-Detected variables automatically generate input handles dynamically.
+Each detected variable automatically creates a corresponding input handle on the node.
 
 ---
 
-### Backend Integration
+## Backend Graph Analysis
 
-The frontend connects to a FastAPI backend to:
+The frontend integrates with a FastAPI backend that:
 
-- Analyze pipelines
-- Count nodes and edges
-- Detect whether the graph is a Directed Acyclic Graph (DAG)
+* Receives nodes and edges
+* Counts graph components
+* Detects graph cycles
+* Validates DAG structure
+
+The analysis results are displayed through a custom modal interface.
 
 ---
 
-## Local Development
+## Additional Enhancements
 
-### Install Dependencies
+* Modern dark-themed UI
+* Responsive workflow toolbar
+* Node deletion functionality
+* Pipeline reset functionality
+* Action confirmations
+* Custom modal-based analysis results
+* Deployed frontend and backend
 
-```bash id="jlmwg2"
+---
+
+# Tech Stack
+
+* React
+* React Flow
+* Zustand (State Management)
+* JavaScript
+* CSS
+
+---
+
+# Project Structure
+
+```bash id="2zy7z7"
+src/
+│
+├── nodes/
+│   ├── BaseNode.js
+│   ├── inputNode.js
+│   ├── outputNode.js
+│   ├── llmNode.js
+│   ├── textNode.js
+│   └── additional custom nodes
+│
+├── toolbar.js
+├── ui.js
+├── store.js
+├── submit.js
+└── App.js
+```
+
+---
+
+# Running the Project Locally
+
+## 1. Clone Repository
+
+```bash id="8np4bg"
+git clone https://github.com/AyushRawat1718/FlowForge_Frontend
+```
+
+---
+
+## 2. Install Dependencies
+
+```bash id="n10m6f"
 npm install
 ```
 
-### Start Development Server
+---
 
-```bash id="jlmwg3"
+## 3. Configure Environment Variables
+
+Create a `.env` file in the root directory:
+
+```env id="7mw5uv"
+REACT_APP_API_URL=https://your-backend-url.onrender.com
+```
+
+---
+
+## 4. Start Development Server
+
+```bash id="u6j2s2"
 npm start
 ```
 
-Frontend runs at:
+Application runs at:
 
-```text id="jlmwg4"
+```bash id="bgphx2"
 http://localhost:3000
 ```
 
 ---
 
-## Environment Variables
+# Backend Requirement
 
-Create a `.env` file in the root directory:
+The frontend requires the FastAPI backend server to be running for pipeline analysis functionality.
 
-```env id="jlmwg5"
-REACT_APP_API_URL=https://your-backend-url.onrender.com
-```
+---
+
+# Live Deployment
+
+Frontend:
+https://flow-forge-1718.vercel.app
+
+---
+
+# Developed By
+
+Ayush Rawat
