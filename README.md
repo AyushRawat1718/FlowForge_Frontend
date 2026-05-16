@@ -1,70 +1,105 @@
-# Getting Started with Create React App
+# FlowForge Frontend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Frontend application for FlowForge — an AI workflow pipeline builder built with React and React Flow.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+- Drag-and-drop pipeline builder
+- Reusable node abstraction system
+- Dynamic TextNode variable parsing
+- Automatic handle generation
+- DAG analysis integration
+- Custom modal-based pipeline insights
+- Node deletion and pipeline reset
+- Responsive dark-themed UI
 
-### `npm start`
+## Tech Stack
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- React
+- React Flow
+- Zustand
+- JavaScript
+- CSS
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Core Functionality
 
-### `npm test`
+### Node Abstraction
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+All nodes are built using a reusable `BaseNode` component that centralizes:
 
-### `npm run build`
+- Layout
+- Styling
+- Handle rendering
+- Shared functionality
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+This allows new nodes to be created quickly with minimal repeated code.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+---
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Dynamic TextNode
 
-### `npm run eject`
+The TextNode supports:
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- Auto-resizing text areas
+- Variable parsing using double curly braces
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Example:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+```text id="jlmwg1"
+{{input}}
+{{username}}
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Detected variables automatically generate input handles dynamically.
 
-## Learn More
+---
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Backend Integration
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+The frontend connects to a FastAPI backend to:
 
-### Code Splitting
+- Analyze pipelines
+- Count nodes and edges
+- Detect whether the graph is a Directed Acyclic Graph (DAG)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+---
 
-### Analyzing the Bundle Size
+## Local Development
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### Install Dependencies
 
-### Making a Progressive Web App
+```bash id="jlmwg2"
+npm install
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+### Start Development Server
 
-### Advanced Configuration
+```bash id="jlmwg3"
+npm start
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+Frontend runs at:
 
-### Deployment
+```text id="jlmwg4"
+http://localhost:3000
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+---
 
-### `npm run build` fails to minify
+## Environment Variables
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Create a `.env` file in the root directory:
+
+```env id="jlmwg5"
+REACT_APP_API_URL=https://your-backend-url.onrender.com
+```
+
+---
+
+## Deployment
+
+Frontend is designed for deployment on:
+
+- Vercel
+
+Backend is deployed separately using FastAPI on Render.
