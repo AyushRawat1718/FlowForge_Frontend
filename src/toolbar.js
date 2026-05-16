@@ -2,6 +2,7 @@
 
 import { DraggableNode } from "./draggableNode";
 import { useStore } from "./store";
+import { SubmitButton } from "./submit";
 
 export const PipelineToolbar = () => {
   const clearPipeline = useStore((state) => state.clearPipeline);
@@ -14,16 +15,58 @@ export const PipelineToolbar = () => {
         backgroundColor: "#111827",
         display: "flex",
         flexDirection: "column",
-        gap: "14px",
+        gap: "18px",
       }}>
-      {/* TITLE */}
+      {/* TOP ROW */}
       <div
         style={{
-          color: "#F8FAFC",
-          fontSize: "18px",
-          fontWeight: "600",
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
         }}>
-        Pipeline Nodes
+        {/* TITLE */}
+        <div
+          style={{
+            color: "#F8FAFC",
+            fontSize: "20px",
+            fontWeight: "700",
+          }}>
+          Pipeline Nodes
+        </div>
+
+        {/* ACTION BUTTONS */}
+        <div
+          style={{
+            display: "flex",
+            gap: "12px",
+            alignItems: "center",
+          }}>
+          {/* CLEAR BUTTON */}
+          <button
+            onClick={() => {
+              const confirmed = window.confirm(
+                "Are you sure you want to clear the entire pipeline?",
+              );
+
+              if (confirmed) {
+                clearPipeline();
+              }
+            }}
+            style={{
+              backgroundColor: "#EF4444",
+              color: "#F8FAFC",
+              border: "none",
+              padding: "10px 16px",
+              borderRadius: "8px",
+              cursor: "pointer",
+              fontWeight: "600",
+            }}>
+            Clear Pipeline
+          </button>
+
+          {/* SUBMIT BUTTON */}
+          <SubmitButton />
+        </div>
       </div>
 
       {/* NODE LIST */}
@@ -44,23 +87,6 @@ export const PipelineToolbar = () => {
         <DraggableNode type="filter" label="Filter" />
         <DraggableNode type="delay" label="Delay" />
       </div>
-
-      {/* CLEAR BUTTON */}
-      <button
-        onClick={clearPipeline}
-        style={{
-          marginTop: "10px",
-          backgroundColor: "#EF4444",
-          color: "#F8FAFC",
-          border: "none",
-          padding: "10px 16px",
-          borderRadius: "8px",
-          cursor: "pointer",
-          fontWeight: "600",
-          width: "fit-content",
-        }}>
-        Clear Pipeline
-      </button>
     </div>
   );
 };

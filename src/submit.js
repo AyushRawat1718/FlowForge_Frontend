@@ -8,6 +8,10 @@ export const SubmitButton = () => {
   const [result, setResult] = useState(null);
 
   const handleSubmit = async () => {
+    const confirmed = window.confirm("Analyze the current pipeline?");
+
+    if (!confirmed) return;
+
     try {
       const response = await fetch(
         `${process.env.REACT_APP_API_URL}/pipelines/parse`,
@@ -39,8 +43,9 @@ export const SubmitButton = () => {
       <div
         style={{
           display: "flex",
+          alignItems: "center",
           justifyContent: "center",
-          padding: "20px",
+          padding: 0,
         }}>
         <button
           type="button"
