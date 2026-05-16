@@ -93,13 +93,3 @@ Create a `.env` file in the root directory:
 ```env id="jlmwg5"
 REACT_APP_API_URL=https://your-backend-url.onrender.com
 ```
-
----
-
-## Deployment
-
-Frontend is designed for deployment on:
-
-- Vercel
-
-Backend is deployed separately using FastAPI on Render.
